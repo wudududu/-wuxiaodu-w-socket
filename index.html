@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <body></body>
+  <script src="./config.js"></script>
+  <script src="./index.js"></script>
+  <script>
+    let WS = new WSocket({
+      url: 'ws://127.0.0.1:8001',
+    })
+    WS.start();
+
+    setTimeout(_ => WS._simulateClose(), 3000);
+  </script>
+</html>
