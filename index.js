@@ -32,6 +32,9 @@ class WSocket {
     this.socket = socket;
     this._initEvent();
   }
+  send(mes) {
+    this.socket.send(mes);
+  }
   _initEvent() {
     const { heartBeat, reconnectConfig, _re } = this.config;
     let listeners = ['close', 'error', 'open', 'message'];
@@ -45,7 +48,11 @@ class WSocket {
         _processFunc = () => {
           if (heartBeat.bool) {
             this._heartTimer = setInterval(() => {
-              this.socket.send(heartBeat.contend);
+              if (this.socket.readyState 
+                  && 
+                  this.socket.readyState === 1) {
+                this.socket.send(heartBeat.contend);
+              }
             }, heartBeat.timeSpan);
           }
           if (_re) {

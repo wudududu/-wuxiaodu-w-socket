@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <body></body>
+  <body>
+    <textarea></textarea>
+    <button>发送消息</button>
+  </body>
   <script src="./config.js"></script>
   <script src="./index.js"></script>
   <script>
@@ -10,5 +13,12 @@
     WS.start();
 
     setTimeout(_ => WS._simulateClose(), 3000);
+
+    let btn = document.querySelector('button');
+    let txt = document.querySelector('textarea');
+
+    btn.onclick = function() {
+      WS.send(txt.value);
+    }
   </script>
 </html>
